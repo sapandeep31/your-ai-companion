@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini Live Multimodal Voice & Video Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="logo">
+                <div class="gemini-icon">✨</div>
+                <h1>Gemini <span>Live Studio</span></h1>
+            </div>
+            <div class="session-badge" id="statusBadge">
+                <span class="dot"></span>
+                <span id="statusText">Disconnected</span>
+            </div>
+        </header>
+
+        <!-- Main Layout -->
+        <main class="main-content">
+            <!-- Left Column: Video & Media Controls -->
+            <section class="media-section">
+                <div class="video-card">
+                    <video id="webcamVideo" autoplay playsinline muted></video>
+                    <canvas id="videoCanvas" style="display: none;"></canvas>
+                    
+                    <div class="video-overlay">
+                        <div class="indicator-tag" id="camStatus">Camera Off</div>
+                        <div class="indicator-tag" id="micStatus">Mic Muted</div>
+                    </div>
+
+                    <!-- Audio Visualizer Overlay -->
+                    <div class="visualizer-container">
+                        <canvas id="audioVisualizer"></canvas>
+                    </div>
+                </div>
+
+                <!-- Control Bar -->
+                <div class="controls-bar">
+                    <button id="btnConnect" class="btn btn-primary">
+                        <span class="btn-icon">⚡</span>
+                        <span id="btnConnectText">Start Session</span>
+                    </button>
+                    <button id="btnToggleMic" class="btn btn-icon-only" title="Toggle Microphone" disabled>
+                        <span class="icon">🎙️</span>
+                    </button>
+                    <button id="btnToggleCam" class="btn btn-icon-only" title="Toggle Camera" disabled>
+                        <span class="icon">📹</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Right Column: Live Transcription & Interaction -->
+            <section class="chat-section">
+                <div class="chat-header">
+                    <h2>Live Transcript</h2>
+                    <span class="model-tag">gemini-3.1-flash-live</span>
+                </div>
+
+                <div class="chat-messages" id="chatMessages">
+                    <div class="system-message">
+                        👋 Click <strong>Start Session</strong> to connect audio and video stream to Gemini Live API. Use headphones for best performance!
+                    </div>
+                </div>
+
+                <!-- Text Input Form -->
+                <form class="text-input-form" id="textForm">
+                    <input type="text" id="textInput" placeholder="Type a message or just speak..." disabled autocomplete="off">
+                    <button type="submit" id="btnSendText" class="btn btn-send" disabled>Send</button>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
