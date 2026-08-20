@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ApiKeyModal } from './ApiKeyModal';
 import { MemoryModal } from './MemoryModal';
 import { API_BASE_URL as API_BASE } from '../config';
+import heroImg from '../assets/hero-img.jpg';
 import '../styles/dashboard.css';
 
 const PRESET_INFO = {
@@ -285,7 +286,7 @@ export function Dashboard() {
             <p>Multi-persona 3D avatars with real-time video vision, speech, and persistent long-term memory.</p>
           </div>
           <div className="hero-image-block">
-            <img src="/src/assets/hero-img.jpg" alt="Anime AI Companion" className="hero-anime-img" />
+            <img src={heroImg} alt="Anime AI Companion" className="hero-anime-img" />
           </div>
         </div>
       </section>
