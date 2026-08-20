@@ -1,6 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "your-ai-companion",
+  "account_id": "bedfdb11117848cb7dabe5dc52ab9731",
   "compatibility_date": "2026-08-20",
   "compatibility_flags": [
     "nodejs_compat"
