@@ -1,16 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --bg-primary: #090d16;
-  --bg-secondary: #0f172a;
-  --card-bg: rgba(30, 41, 59, 0.7);
-  --card-border: rgba(255, 255, 255, 0.08);
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --card-bg: #ffffff;
+  --card-border: rgba(0, 0, 0, 0.1);
   --accent-pink: #e84393;
   --accent-purple: #8854d0;
   --accent-cyan: #00d2d3;
   --accent-crimson: #ff4757;
-  --text-main: #f8fafc;
-  --text-muted: #94a3b8;
+  --text-main: #000000;
+  --text-muted: #64748b;
 }
 
 body {
@@ -23,7 +23,7 @@ body {
 
 .dashboard-container {
   min-height: 100vh;
-  background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #090d16 65%);
+  background: var(--bg-primary);
   display: flex;
   flex-direction: column;
 }
@@ -33,8 +33,9 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem 3rem;
-  background: rgba(15, 23, 42, 0.75);
-  backdrop-filter: blur(16px);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--card-border);
   position: sticky;
   top: 0;
@@ -47,26 +48,35 @@ body {
   gap: 0.85rem;
 }
 
-.brand-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, #e84393, #8854d0);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.4rem;
-  box-shadow: 0 0 20px rgba(232, 67, 147, 0.4);
+.mobile-burger-btn {
+  display: none;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: #000;
+  cursor: pointer;
+  padding: 0.5rem;
 }
 
-.brand-title-dash {
-  font-family: 'Outfit', sans-serif;
-  font-size: 1.5rem;
+.brand-text-stack {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.brand-title-main {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
   font-weight: 700;
-  letter-spacing: -0.5px;
-  background: linear-gradient(to right, #ffffff, #cbd5e1);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #000000;
+  line-height: 1.1;
+}
+
+.brand-title-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: #000000;
 }
 
 .dash-user-section {
@@ -76,59 +86,85 @@ body {
 }
 
 .btn-primary-glow {
-  background: linear-gradient(135deg, #e84393 0%, #8854d0 100%);
+  background: #000000;
   color: white;
   border: none;
   padding: 0.65rem 1.4rem;
-  border-radius: 10px;
+  border-radius: 6px;
   font-weight: 600;
   font-size: 0.95rem;
   cursor: pointer;
-  box-shadow: 0 4px 15px rgba(232, 67, 147, 0.35);
   transition: all 0.2s ease;
 }
 
 .btn-primary-glow:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(232, 67, 147, 0.5);
+  background: #333333;
 }
 
 .btn-outline-dash {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--card-border);
-  color: var(--text-main);
+  background: transparent;
+  border: 1px solid #000000;
+  color: #000000;
   padding: 0.65rem 1.2rem;
-  border-radius: 10px;
+  border-radius: 6px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .btn-outline-dash:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.05);
 }
 
 /* Dashboard Hero */
 .dash-hero {
-  padding: 3rem 3rem 1.5rem;
+  padding: 4rem 3rem 2rem;
   max-width: 1200px;
   margin: 0 auto;
   width: calc(100% - 6rem);
 }
 
-.hero-welcome h1 {
-  font-family: 'Outfit', sans-serif;
-  font-size: 2.4rem;
-  font-weight: 700;
-  margin: 0 0 0.5rem;
-  letter-spacing: -0.5px;
+.hero-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
 }
 
-.hero-welcome p {
-  color: var(--text-muted);
-  font-size: 1.1rem;
+.hero-text-block {
+  flex: 1;
+}
+
+.hero-text-block h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 4.5rem;
+  font-weight: 900;
+  line-height: 1.05;
+  color: #000000;
+  margin: 0 0 1.5rem;
+  letter-spacing: -2px;
+}
+
+.hero-text-block p {
+  color: #64748b;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  max-width: 90%;
   margin: 0;
+}
+
+.hero-image-block {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-anime-img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.05);
 }
 
 .user-bio-card {
@@ -146,7 +182,7 @@ body {
 .bio-content h4 {
   margin: 0 0 0.25rem;
   font-size: 0.9rem;
-  color: #38bdf8;
+  color: #000000;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -154,7 +190,7 @@ body {
 .bio-content p {
   margin: 0;
   font-size: 0.95rem;
-  color: #e2e8f0;
+  color: #333333;
 }
 
 /* Companions Grid */
@@ -229,9 +265,9 @@ body {
   text-transform: uppercase;
   padding: 0.25rem 0.65rem;
   border-radius: 20px;
-  background: rgba(255, 255, 255, 0.1);
-  color: #cbd5e1;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.05);
+  color: #333333;
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .persona-info h3 {
@@ -260,12 +296,13 @@ body {
 }
 
 .meta-chip {
-  background: rgba(0, 0, 0, 0.25);
+  background: rgba(0, 0, 0, 0.05);
   padding: 0.2rem 0.5rem;
   border-radius: 6px;
   display: flex;
   align-items: center;
   gap: 0.3rem;
+  color: #333333;
 }
 
 .persona-card-actions {
@@ -276,7 +313,7 @@ body {
 
 .btn-talk {
   flex: 1;
-  background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+  background: #000000;
   color: white;
   border: none;
   padding: 0.7rem 1rem;
@@ -314,13 +351,13 @@ body {
 }
 
 .modal-card {
-  background: #0f172a;
-  border: 1px solid var(--card-border);
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 24px;
   width: 100%;
   max-width: 520px;
   padding: 2rem;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
   position: relative;
   max-height: 90vh;
   overflow-y: auto;
@@ -337,12 +374,13 @@ body {
   font-family: 'Outfit', sans-serif;
   margin: 0;
   font-size: 1.5rem;
+  color: #000000;
 }
 
 .btn-close-modal {
   background: transparent;
   border: none;
-  color: var(--text-muted);
+  color: #64748b;
   font-size: 1.5rem;
   cursor: pointer;
 }
@@ -355,26 +393,26 @@ body {
   display: block;
   font-size: 0.85rem;
   font-weight: 500;
-  color: #cbd5e1;
+  color: #333333;
   margin-bottom: 0.4rem;
 }
 
 .form-input, .form-textarea, .form-select {
   width: 100%;
   box-sizing: border-box;
-  background: #1e293b;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   padding: 0.75rem 1rem;
-  color: white;
+  color: #000000;
   font-family: inherit;
   font-size: 0.95rem;
 }
 
 .form-input:focus, .form-textarea:focus, .form-select:focus {
   outline: none;
-  border-color: #6366f1;
-  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+  border-color: #000000;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
 }
 
 .preset-selector-grid {
@@ -385,20 +423,20 @@ body {
 }
 
 .preset-chip-btn {
-  background: #1e293b;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 12px;
   padding: 0.75rem;
   cursor: pointer;
   text-align: left;
   transition: all 0.2s ease;
-  color: white;
+  color: #000000;
 }
 
 .preset-chip-btn.active {
-  background: rgba(99, 102, 241, 0.15);
-  border-color: #6366f1;
-  box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
+  background: rgba(0, 0, 0, 0.05);
+  border-color: #000000;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
 }
 
 .preset-chip-title {
@@ -409,5 +447,40 @@ body {
 
 .preset-chip-sub {
   font-size: 0.75rem;
-  color: var(--text-muted);
+  color: #64748b;
+}
+
+@media (max-width: 768px) {
+  .dash-header {
+    flex-wrap: wrap;
+    padding: 1rem 1.5rem;
+  }
+  .mobile-burger-btn {
+    display: block;
+  }
+  .dash-user-section {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    margin-top: 1rem;
+    align-items: stretch;
+  }
+  .dash-user-section.open {
+    display: flex;
+  }
+  .hero-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
+  }
+  .hero-text-block h1 {
+    font-size: 3rem;
+  }
+  .hero-text-block p {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  .hero-image-block {
+    width: 100%;
+  }
 }

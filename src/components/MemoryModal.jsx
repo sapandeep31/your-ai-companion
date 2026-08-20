@@ -35,15 +35,15 @@ export function MemoryModal({ isOpen, onClose, persona, onClearMemory }) {
       <div
         onClick={(e) => e.stopPropagation()}
         style={{
-          background: '#0f172a',
-          border: '1px solid rgba(255, 255, 255, 0.15)',
+          background: '#ffffff',
+          border: '1px solid rgba(0, 0, 0, 0.1)',
           borderRadius: '24px',
           width: '100%',
           maxWidth: '520px',
           padding: '2rem',
-          boxShadow: '0 25px 60px rgba(0, 0, 0, 0.7), 0 0 40px rgba(99, 102, 241, 0.15)',
+          boxShadow: '0 25px 60px rgba(0, 0, 0, 0.15), 0 0 40px rgba(0, 0, 0, 0.05)',
           position: 'relative',
-          color: '#f8fafc',
+          color: '#000000',
           fontFamily: 'Inter, sans-serif',
           animation: 'modalPop 0.2s cubic-bezier(0.16, 1, 0.3, 1)'
         }}
@@ -54,9 +54,9 @@ export function MemoryModal({ isOpen, onClose, persona, onClearMemory }) {
             position: 'absolute',
             top: '18px',
             right: '20px',
-            background: 'rgba(255, 255, 255, 0.08)',
+            background: 'rgba(0, 0, 0, 0.05)',
             border: 'none',
-            color: '#94a3b8',
+            color: '#64748b',
             fontSize: '1.4rem',
             lineHeight: 1,
             cursor: 'pointer',
@@ -68,8 +68,8 @@ export function MemoryModal({ isOpen, onClose, persona, onClearMemory }) {
             justifyContent: 'center',
             transition: 'all 0.2s ease'
           }}
-          onMouseEnter={(e) => { e.currentTarget.style.color = '#fff'; e.currentTarget.style.background = 'rgba(255, 255, 255, 0.15)'; }}
-          onMouseLeave={(e) => { e.currentTarget.style.color = '#94a3b8'; e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)'; }}
+          onMouseEnter={(e) => { e.currentTarget.style.color = '#000'; e.currentTarget.style.background = 'rgba(0, 0, 0, 0.1)'; }}
+          onMouseLeave={(e) => { e.currentTarget.style.color = '#64748b'; e.currentTarget.style.background = 'rgba(0, 0, 0, 0.05)'; }}
         >
           &times;
         </button>
@@ -80,7 +80,7 @@ export function MemoryModal({ isOpen, onClose, persona, onClearMemory }) {
             <h2 style={{ margin: 0, fontSize: '1.35rem', fontWeight: '700', fontFamily: 'Outfit, sans-serif' }}>
               {persona.name}'s Memory
             </h2>
-            <span style={{ fontSize: '0.78rem', color: '#94a3b8' }}>
+            <span style={{ fontSize: '0.78rem', color: '#64748b' }}>
               Consolidated rolling memory & shared context
             </span>
           </div>
@@ -89,32 +89,32 @@ export function MemoryModal({ isOpen, onClose, persona, onClearMemory }) {
         {hasMemory ? (
           <div style={{ marginTop: '1.25rem' }}>
             <div style={{
-              background: 'rgba(15, 23, 42, 0.7)',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
+              background: 'rgba(0, 0, 0, 0.03)',
+              border: '1px solid rgba(0, 0, 0, 0.1)',
               borderRadius: '16px',
               padding: '1.2rem',
               marginBottom: '1rem'
             }}>
-              <h4 style={{ margin: '0 0 0.5rem 0', fontSize: '0.88rem', color: '#a5b4fc', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+              <h4 style={{ margin: '0 0 0.5rem 0', fontSize: '0.88rem', color: '#000000', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                 Summary of What She Knows
               </h4>
-              <p style={{ color: '#e2e8f0', fontSize: '0.95rem', lineHeight: '1.6', margin: 0 }}>
+              <p style={{ color: '#333333', fontSize: '0.95rem', lineHeight: '1.6', margin: 0 }}>
                 {summary}
               </p>
             </div>
 
             {highlights.length > 0 && (
               <div style={{
-                background: 'rgba(99, 102, 241, 0.08)',
-                border: '1px solid rgba(99, 102, 241, 0.2)',
+                background: 'rgba(0, 0, 0, 0.02)',
+                border: '1px solid rgba(0, 0, 0, 0.08)',
                 borderRadius: '16px',
                 padding: '1.2rem',
                 marginBottom: '1rem'
               }}>
-                <h4 style={{ margin: '0 0 0.6rem 0', fontSize: '0.85rem', color: '#818cf8', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                <h4 style={{ margin: '0 0 0.6rem 0', fontSize: '0.85rem', color: '#000000', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                   Key Highlights & Insights
                 </h4>
-                <ul style={{ margin: 0, paddingLeft: '1.2rem', color: '#cbd5e1', fontSize: '0.9rem', lineHeight: '1.6' }}>
+                <ul style={{ margin: 0, paddingLeft: '1.2rem', color: '#333333', fontSize: '0.9rem', lineHeight: '1.6' }}>
                   {highlights.map((hl, idx) => (
                     <li key={idx} style={{ marginBottom: '0.3rem' }}>{hl}</li>
                   ))}
@@ -138,8 +138,8 @@ export function MemoryModal({ isOpen, onClose, persona, onClearMemory }) {
                   }}
                   style={{
                     background: 'transparent',
-                    border: '1px solid rgba(239, 68, 68, 0.35)',
-                    color: '#f87171',
+                    border: '1px solid rgba(220, 38, 38, 0.35)',
+                    color: '#dc2626',
                     padding: '0.65rem 1.1rem',
                     borderRadius: '10px',
                     cursor: 'pointer',
@@ -147,7 +147,7 @@ export function MemoryModal({ isOpen, onClose, persona, onClearMemory }) {
                     fontSize: '0.9rem',
                     transition: 'all 0.2s ease'
                   }}
-                  onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(239, 68, 68, 0.1)'}
+                  onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(220, 38, 38, 0.05)'}
                   onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
                 >
                   🧹 Clear Memory
@@ -167,14 +167,14 @@ export function MemoryModal({ isOpen, onClose, persona, onClearMemory }) {
           <div style={{
             textAlign: 'center',
             padding: '2.5rem 1rem',
-            background: 'rgba(255, 255, 255, 0.03)',
+            background: 'rgba(0, 0, 0, 0.03)',
             borderRadius: '16px',
-            border: '1px dashed rgba(255, 255, 255, 0.12)',
+            border: '1px dashed rgba(0, 0, 0, 0.15)',
             marginTop: '1.25rem'
           }}>
             <div style={{ fontSize: '2.2rem', marginBottom: '0.5rem' }}>🌱</div>
             <h4 style={{ margin: '0 0 0.4rem 0', fontSize: '1.1rem' }}>No Memories Yet</h4>
-            <p style={{ color: '#94a3b8', fontSize: '0.88rem', margin: '0 0 1.5rem 0', lineHeight: '1.5' }}>
+            <p style={{ color: '#475569', fontSize: '0.88rem', margin: '0 0 1.5rem 0', lineHeight: '1.5' }}>
               {persona.name} hasn't formed any long-term memories with you yet. Start a live conversation to share your day with her!
             </p>
             <button

@@ -21,6 +21,8 @@ export function Dashboard() {
   // Modals
   const [showApiKeyModal, setShowApiKeyModal] = useState(false);
   const [selectedMemoryPersona, setSelectedMemoryPersona] = useState(null);
+  const [showUserDropdown, setShowUserDropdown] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   // Auth Modals
   const [showAuthModal, setShowAuthModal] = useState(false);
@@ -218,11 +220,20 @@ export function Dashboard() {
       {/* Top Navigation */}
       <header className="dash-header">
         <div className="dash-brand">
-          <div className="brand-icon">✨</div>
-          <span className="brand-title-dash">Sara AI Companion Hub</span>
+          <div className="brand-text-stack">
+            <span className="brand-title-main">Sara</span>
+            <span className="brand-title-sub">AI Companion Hub</span>
+          </div>
         </div>
 
-        <div className="dash-user-section" style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+        <button 
+          className="mobile-burger-btn" 
+          onClick={() => setShowMobileMenu(!showMobileMenu)}
+        >
+          {showMobileMenu ? '✕' : '☰'}
+        </button>
+
+        <div className={`dash-user-section ${showMobileMenu ? 'open' : ''}`}>
           <button
             className="btn-outline-dash"
             style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', borderColor: localStorage.getItem('gemini_api_key') ? '#22c55e' : undefined }}
@@ -234,14 +245,26 @@ export function Dashboard() {
           </button>
 
           {user ? (
-            <>
-              <span style={{ fontSize: '0.95rem', color: '#cbd5e1' }}>
-                👋 Welcome, <strong>{user.username}</strong>
-              </span>
-              <button className="btn-outline-dash" onClick={handleLogout}>
-                Logout
-              </button>
-            </>
+            <div style={{ position: 'relative' }}>
+              <div 
+                style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}
+                onClick={() => setShowUserDropdown(!showUserDropdown)}
+              >
+                <span style={{ fontSize: '0.95rem', color: '#000000', fontWeight: 500 }}>
+                  👋 Welcome, <strong>{user.username}</strong> ▾
+                </span>
+              </div>
+              {showUserDropdown && (
+                <div style={{ position: 'absolute', top: '100%', right: 0, marginTop: '0.5rem', background: '#fff', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '8px', boxShadow: '0 4px 15px rgba(0,0,0,0.05)', padding: '0.5rem', zIndex: 10, minWidth: '150px' }}>
+                  <button onClick={() => { setShowUserDropdown(false); setIsEditingBio(true); }} style={{ display: 'block', width: '100%', textAlign: 'left', padding: '0.5rem', background: 'transparent', border: 'none', cursor: 'pointer', color: '#333' }}>
+                    ✏️ Edit Memory
+                  </button>
+                  <button onClick={() => { setShowUserDropdown(false); handleLogout(); }} style={{ display: 'block', width: '100%', textAlign: 'left', padding: '0.5rem', background: 'transparent', border: 'none', cursor: 'pointer', color: '#333' }}>
+                    🚪 Logout
+                  </button>
+                </div>
+              )}
+            </div>
           ) : (
             <>
               <button className="btn-outline-dash" onClick={() => { setAuthMode('login'); setShowAuthModal(true); }}>
@@ -254,95 +277,16 @@ export function Dashboard() {
           )}
         </div>
       </header>
-
-      {/* User Bio / Context Section */}
+            {/* Hero Section */}
       <section className="dash-hero">
-        <div className="hero-welcome">
-          <h1>Meet Your Personal AI Companions</h1>
-          <p>Multi-persona 3D avatars with real-time video vision, speech, and persistent long-term memory.</p>
-        </div>
-
-        {user ? (
-          <div className="user-bio-card">
-            <div className="bio-content" style={{ flex: 1 }}>
-              <h4>🧠 About You (Injected into your companion's memory)</h4>
-              {isEditingBio ? (
-                <div style={{ marginTop: '0.5rem', display: 'flex', gap: '0.5rem' }}>
-                  <textarea
-                    className="form-textarea"
-                    rows={2}
-                    value={bioInput}
-                    onChange={(e) => setBioInput(e.target.value)}
-                    placeholder="Tell your companion what you do, what you like, your daily schedule..."
-                  />
-                  <button className="btn-primary-glow" onClick={handleSaveBio}>Save</button>
-                  <button className="btn-outline-dash" onClick={() => setIsEditingBio(false)}>Cancel</button>
-                </div>
-              ) : (
-                <p>{user.about || "No bio added yet. Click edit to tell your girlfriend about yourself!"}</p>
-              )}
-            </div>
-            {!isEditingBio && (
-              <button className="btn-outline-dash" style={{ marginLeft: '1rem' }} onClick={() => setIsEditingBio(true)}>
-                ✏️ Edit Bio
-              </button>
-            )}
+        <div className="hero-content">
+          <div className="hero-text-block">
+            <h1>Meet Your Personal<br/>AI Companions.</h1>
+            <p>Multi-persona 3D avatars with real-time video vision, speech, and persistent long-term memory.</p>
           </div>
-        ) : (
-          <div className="user-bio-card" style={{ background: 'rgba(99, 102, 241, 0.08)', borderColor: 'rgba(99, 102, 241, 0.25)', marginTop: '2rem' }}>
-            <div className="bio-content">
-              <h4 style={{ color: '#a5b4fc' }}>🔒 Private & Secure Long-Term Memory</h4>
-              <p>Please log in or create an account to access your personal AI companions, custom personalities, and private memory logs.</p>
-            </div>
-            <div style={{ display: 'flex', gap: '0.75rem' }}>
-              <button className="btn-outline-dash" onClick={() => { setAuthMode('login'); setShowAuthModal(true); }}>
-                Log In
-              </button>
-              <button className="btn-primary-glow" onClick={() => { setAuthMode('signup'); setShowAuthModal(true); }}>
-                Sign Up
-              </button>
-            </div>
+          <div className="hero-image-block">
+            <img src="/src/assets/hero-img.jpg" alt="Anime AI Companion" className="hero-anime-img" />
           </div>
-        )}
-
-        {/* Premium Access Banner */}
-        <div style={{
-          background: 'linear-gradient(135deg, rgba(234, 179, 8, 0.08) 0%, rgba(99, 102, 241, 0.08) 100%)',
-          border: '1px solid rgba(234, 179, 8, 0.25)',
-          borderRadius: '16px',
-          padding: '14px 20px',
-          marginTop: '1.25rem',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          flexWrap: 'wrap',
-          gap: '1rem'
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-            <span style={{ fontSize: '1.6rem' }}>💎</span>
-            <div>
-              <div style={{ fontWeight: 600, color: '#fef08a', fontSize: '0.92rem' }}>
-                High-Speed Dedicated Quota & Premium Tier
-              </div>
-              <div style={{ color: '#94a3b8', fontSize: '0.82rem' }}>
-                Bring your own free Gemini API key in the navbar or contact{' '}
-                <a
-                  href="mailto:sapandeep318@gmail.com?subject=Premium%20Tier%20Access%20Inquiry"
-                  style={{ color: '#fed7aa', fontWeight: 600, textDecoration: 'underline' }}
-                >
-                  sapandeep318@gmail.com
-                </a>{' '}
-                for dedicated premium access.
-              </div>
-            </div>
-          </div>
-          <button
-            onClick={() => setShowApiKeyModal(true)}
-            className="btn-outline-dash"
-            style={{ borderColor: 'rgba(234, 179, 8, 0.4)', color: '#fef08a', fontSize: '0.85rem' }}
-          >
-            🔑 Configure Key
-          </button>
         </div>
       </section>
 
@@ -372,7 +316,7 @@ export function Dashboard() {
                       <div className="persona-card-top">
                         <div
                           className="avatar-preview-circle"
-                          style={{ background: `radial-gradient(circle, ${p.shirt_color || '#e84393'}44 0%, #0f172a 80%)` }}
+                          style={{ background: `radial-gradient(circle, ${p.shirt_color || '#e84393'}44 0%, #ffffff 80%)` }}
                         >
                           {preset.icon}
                         </div>
@@ -427,13 +371,13 @@ export function Dashboard() {
           <div style={{
             textAlign: 'center',
             padding: '4rem 2rem',
-            background: 'rgba(15, 23, 42, 0.4)',
+            background: 'rgba(0, 0, 0, 0.03)',
             borderRadius: '24px',
-            border: '1px dashed rgba(255, 255, 255, 0.1)'
+            border: '1px dashed rgba(0, 0, 0, 0.15)'
           }}>
             <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>✨</div>
-            <h3 style={{ fontSize: '1.4rem', margin: '0 0 0.5rem' }}>Sign In to Unlock Your Companions</h3>
-            <p style={{ color: '#94a3b8', maxWidth: '500px', margin: '0 auto 1.5rem' }}>
+            <h3 style={{ fontSize: '1.4rem', margin: '0 0 0.5rem', color: '#000000' }}>Sign In to Unlock Your Companions</h3>
+            <p style={{ color: '#475569', maxWidth: '500px', margin: '0 auto 1.5rem' }}>
               Create and chat with realistic 3D companions like Sara, Tsundere Asuka, Yandere Yuno, or build your own custom character with long-term memory.
             </p>
             <button className="btn-primary-glow" onClick={() => { setAuthMode('signup'); setShowAuthModal(true); }}>
@@ -498,11 +442,11 @@ export function Dashboard() {
                 {authMode === 'signup' ? 'Sign Up & Meet Sara' : 'Log In'}
               </button>
 
-              <div style={{ textAlign: 'center', marginTop: '1.2rem', fontSize: '0.85rem', color: '#94a3b8' }}>
+              <div style={{ textAlign: 'center', marginTop: '1.2rem', fontSize: '0.85rem', color: '#64748b' }}>
                 {authMode === 'signup' ? (
-                  <>Already have an account? <span style={{ color: '#6366f1', cursor: 'pointer' }} onClick={() => setAuthMode('login')}>Log In</span></>
+                  <>Already have an account? <span style={{ color: '#000000', cursor: 'pointer', fontWeight: '500' }} onClick={() => setAuthMode('login')}>Log In</span></>
                 ) : (
-                  <>Don't have an account? <span style={{ color: '#6366f1', cursor: 'pointer' }} onClick={() => setAuthMode('signup')}>Sign Up</span></>
+                  <>Don't have an account? <span style={{ color: '#000000', cursor: 'pointer', fontWeight: '500' }} onClick={() => setAuthMode('signup')}>Sign Up</span></>
                 )}
               </div>
             </form>
@@ -590,6 +534,33 @@ export function Dashboard() {
                 Create Companion
               </button>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* Edit Bio Modal */}
+      {isEditingBio && (
+        <div className="modal-overlay" onClick={() => setIsEditingBio(false)}>
+          <div className="modal-card" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h2 style={{ color: '#000' }}>Edit Private Memory</h2>
+              <button className="btn-close-modal" onClick={() => setIsEditingBio(false)}>✕</button>
+            </div>
+            <div className="form-group">
+              <label style={{ color: '#333' }}>About You (Your job, interests, habits):</label>
+              <textarea
+                className="form-textarea"
+                rows={4}
+                value={bioInput}
+                onChange={(e) => setBioInput(e.target.value)}
+                placeholder="Tell your companion what you do, what you like, your daily schedule..."
+                style={{ background: '#fff', border: '1px solid rgba(0,0,0,0.1)', color: '#000' }}
+              />
+            </div>
+            <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1rem' }}>
+              <button className="btn-primary-glow" onClick={handleSaveBio} style={{ flex: 1 }}>Save</button>
+              <button className="btn-outline-dash" onClick={() => setIsEditingBio(false)} style={{ flex: 1 }}>Cancel</button>
+            </div>
           </div>
         </div>
       )}
