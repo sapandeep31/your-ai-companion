@@ -11,7 +11,8 @@ from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select
+from datetime import datetime, timezone
+from sqlalchemy import select, text
 from google import genai
 from google.genai import types
 from dotenv import load_dotenv
@@ -36,7 +37,7 @@ try:
 except Exception as e:
     logger.error(f"DB initialization warning: {e}")
 
-app = FastAPI(title="Sara AI Multi-Persona Live Platform")
+app = FastAPI(title="Your AI Companion Live Platform")
 
 # CORS middleware - Allow all origins for seamless client access
 app.add_middleware(
@@ -46,6 +47,24 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Health Check API
+@app.get("/health")
+@app.get("/api/health")
+async def health_check(db: AsyncSession = Depends(get_db)):
+    db_status = "healthy"
+    try:
+        await db.execute(text("SELECT 1"))
+    except Exception as e:
+        logger.error(f"Database health check failed: {e}")
+        db_status = "unhealthy"
+
+    return {
+        "status": "ok" if db_status == "healthy" else "degraded",
+        "service": "your-ai-companion-backend",
+        "database": db_status,
+        "timestamp": datetime.now(timezone.utc).isoformat()
+    }
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_DIR = os.path.join(BASE_DIR, "static")
