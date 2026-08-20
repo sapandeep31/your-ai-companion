@@ -5,7 +5,7 @@
 
 export const API_BASE_URL = (
   import.meta.env.VITE_API_BASE_URL || 
-  (import.meta.env.PROD ? 'https://youraicompanionbackend2-d2bku3kh.b4a.run' : 'http://localhost:8000')
+  (import.meta.env.PROD ? 'https://your-ai-companion-backend.onrender.com' : 'http://localhost:8000')
 ).replace(/\/$/, '');
 
 export const WS_BASE_URL = (
